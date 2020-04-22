@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amadon</title>
+</head>
+<nav style="background-color: #e3f2fd;" class="navbar navbar-expand-lg">
+    <h2 class="text-muted">Welcome on Amadon Store</h2>	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse float-left" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+  </nav>
+<body><br><br><br>
+
+<div class="container-fluid center">
+    <h1>Amadon Store!</h1>
+    <table class="table">
+        <thead class="thead-dark"  >
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in all_products %}
+            <tr>
+                <form action="/checkout" method="post">
+                    {% csrf_token %}
+                    <td>{{product.description}}</td>
+                    <td><input type="hidden" name="price" value="{{product.price}}">{{product.price}}</td>
+                    <td><select title="Choose one of the following..." name="quantity">
+                        <option value="1">1</option>              
+                        <option value="2">2</option>              
+                        <option value="3">3</option>              
+                    </select></td>
+                    <td><input type="submit" value="Buy!"></td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
